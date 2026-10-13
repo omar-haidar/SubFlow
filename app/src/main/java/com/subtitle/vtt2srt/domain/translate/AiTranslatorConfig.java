@@ -31,23 +31,23 @@ public final class AiTranslatorConfig {
 
     public String getEffectiveModelName() {
         if (!modelName.isEmpty()) return modelName;
-        switch (engineType) {
-            case GEMINI: return "gemini-1.5-flash";
-            case DEEPSEEK: return "deepseek-chat";
-            case CLAUDE: return "claude-3-5-haiku-20241022";
-            case CUSTOM_OPENAI: return "gpt-4o-mini";
-            default: return "";
-        }
+        return switch (engineType) {
+            case GEMINI -> "gemini-1.5-flash";
+            case DEEPSEEK -> "deepseek-chat";
+            case CLAUDE -> "claude-3-5-haiku-20241022";
+            case CUSTOM_OPENAI -> "gpt-4o-mini";
+            default -> "";
+        };
     }
 
     public String getEffectiveBaseUrl() {
         if (!baseUrl.isEmpty()) return baseUrl;
-        switch (engineType) {
-            case DEEPSEEK: return "https://api.deepseek.com/v1";
-            case CLAUDE: return "https://api.anthropic.com/v1";
-            case CUSTOM_OPENAI: return "https://api.openai.com/v1";
-            default: return "";
-        }
+        return switch (engineType) {
+            case DEEPSEEK -> "https://api.deepseek.com/v1";
+            case CLAUDE -> "https://api.anthropic.com/v1";
+            case CUSTOM_OPENAI -> "https://api.openai.com/v1";
+            default -> "";
+        };
     }
 
     public static final class Builder {

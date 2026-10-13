@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -89,5 +90,9 @@ public class UI {
             result = ctx.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    public static float getDip(Context context,int value){
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,value,context.getResources().getDisplayMetrics());
     }
 }

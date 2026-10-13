@@ -9,6 +9,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -79,18 +80,29 @@ public class MainActivity extends AppCompatActivity {
             selectedTargetLang = languages.get(0).getCode();
             binding.swRtl.setChecked(languages.get(0).isRtl());
         }
-        binding.actvTargetLanguage.setOnItemClickListener((parent, view, position, id) ->
-
-        {
+        binding.actvTargetLanguage.setOnItemClickListener((parent, view, position, id) -> {
             SubtitleLanguage lang = languages.get(position);
             selectedTargetLang = lang.getCode();
             binding.swRtl.setChecked(lang.isRtl());
         });
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetPreview);
-        binding.layoutSheetHeader.setOnClickListener(v ->
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int state) {
 
-        {
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+               
+                binding.bottomSheetHandler.setAlpha(1.0f - v);
+                int diff = (int) (64 * v);
+                int topPadding = (int) UI.getDip(MainActivity.this, (64 - diff));
+                binding.bottomSheetContent.setPadding(0, topPadding, 0, 0);
+            }
+        });
+        binding.layoutSheetHeader.setOnClickListener(v -> {
             if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             } else {

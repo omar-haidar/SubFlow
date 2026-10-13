@@ -23,8 +23,7 @@ public class GoogleTranslator implements Translator {
     }
 
     @Override
-    public String translate(String text, String sourceLang, String targetLang)
-            throws TranslationException {
+    public String translate(String text, String sourceLang, String targetLang) throws TranslationException {
         try {
             String url = ENDPOINT + "?client=gtx&dt=t"
                     + "&sl=" + URLEncoder.encode(sourceLang, "UTF-8")

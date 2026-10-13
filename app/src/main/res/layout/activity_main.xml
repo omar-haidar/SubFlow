@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Main Content Area -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +28,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fadingEdgeLength="16dp"
+            android:fadingEdgeLength="8dp"
             android:fillViewport="true"
             android:requiresFadingEdge="vertical">
 
@@ -88,9 +88,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:gravity="center"
-                            app:fontFamily="@font/qomra_bold"
                             android:text="@string/options_title"
-                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+                            android:textAppearance="?attr/textAppearanceTitleMedium"
+                            android:textStyle="bold" />
 
                         <com.google.android.material.materialswitch.MaterialSwitch
                             android:id="@+id/swTranslate"
@@ -198,9 +198,15 @@
                     android:text="@string/save"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    tools:ignore="UselessLeaf" />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+
 
     <!-- 4) Bottom Sheet Preview -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -210,7 +216,7 @@
         android:background="?attr/colorSurfaceContainerHigh"
         android:elevation="16dp"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="130dp"
+        app:behavior_peekHeight="124dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:shapeAppearanceOverlay="@style/BottomSheetShape">
 
@@ -221,10 +227,10 @@
 
             <!-- Drag Handle -->
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/bottomSheetHandler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                />
+                android:layout_gravity="center_horizontal" />
 
             <!-- Header Layout (Clickable to toggle expand/collapse) -->
             <LinearLayout
@@ -237,53 +243,63 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPreviewTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fontFamily="@font/qomra_bold"
-                    android:text="@string/preview_title"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textAppearance="?attr/textAppearanceTitleLarge" />
+                    android:text="@string/preview_title"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvCueCount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Content Area -->
-            <FrameLayout
+            <LinearLayout
+                android:id="@+id/bottomSheetContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="16dp"
-                android:paddingBottom="16dp">
+               android:paddingTop="64dp"
+                android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvCues"
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!-- Content Area -->
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingBottom="32dp"
-                    android:visibility="gone" />
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="16dp">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvEmpty"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:padding="24dp"
-                    android:text="@string/preview_empty"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
-            </FrameLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCues"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingBottom="32dp"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="24dp"
+                        android:text="@string/preview_empty"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </FrameLayout>
+            </LinearLayout>
+
 
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

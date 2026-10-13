@@ -1,5 +1,7 @@
 package com.subtitle.vtt2srt.domain.model;
 
+import androidx.annotation.NonNull;
+
 /** Immutable conversion settings, created through {@link Builder}. */
 public final class ConversionOptions {
 
@@ -9,7 +11,7 @@ public final class ConversionOptions {
     private final boolean keepSpeakers;
     private final boolean rtlMarks;
 
-    private ConversionOptions(Builder b) {
+    private ConversionOptions(@NonNull Builder b) {
         this.translate = b.translate;
         this.targetLang = b.targetLang;
         this.bilingual = b.bilingual;
