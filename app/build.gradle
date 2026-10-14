@@ -3,9 +3,9 @@ plugins {
     alias(libs.plugins.android.application)
 }
 def kspFile = rootProject.file('keystore.properties')
-def ksp = new Properties()
+def keystoreProperties = new Properties()
 if (kspFile.exists()){
-    ksp.load(new FileInputStream(kspFile))
+    keystoreProperties.load(new FileInputStream(kspFile))
 }
 android {
     namespace 'dev.omarhaidar.subflow'
@@ -20,20 +20,21 @@ android {
     }
 
     signingConfigs {
-        debug {
-            if (ksp['storeFile'] != null) {
-                storeFile rootProject.file(ksp['storeFile'])
-                storePassword ksp['storePassword']
-                keyAlias ksp['keyAlias']
-                keyPassword ksp['keyPassword']
-            }
-        }
         release {
-            if (ksp['storeFile'] != null) {
-                storeFile rootProject.file(ksp['storeFile'])
-                storePassword ksp['storePassword']
-                keyAlias ksp['keyAlias']
-                keyPassword ksp['keyPassword']
+
+            def envStorePassword = System.getenv("KEYSTORE_PASSWORD")
+
+            if (envStorePassword != null && !envStorePassword.isEmpty()) {
+                storeFile file("$rootDir/app/release-key.jks")
+                storePassword envStorePassword
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
+            else if (keystoreProperties && keystoreProperties.getProperty("storePassword") != null) {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
             }
         }
     }
@@ -41,7 +42,8 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

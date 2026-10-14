@@ -6,3 +6,5 @@
 /build/
 /app/build/
 /captures/
+keystore.properties
+/app/release_key.jks
