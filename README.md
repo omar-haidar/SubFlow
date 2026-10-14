@@ -1,4 +1,4 @@
-# Vtt2Srt — WebVTT to SubRip (SRT) Converter & AI Translator
+# SubFlow — WebVTT to SubRip (SRT) Converter & AI Translator
 
 [![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com)
 [![Java](https://img.shields.io/badge/Language-Java%2021-orange.svg)](https://www.oracle.com/java/)
@@ -6,7 +6,7 @@
 [![TargetSDK](https://img.shields.io/badge/TargetSDK-36-brightgreen.svg)](https://developer.android.com)
 [![Architecture](https://img.shields.io/badge/Architecture-MVVM%20%2B%20Clean-purple.svg)](https://developer.android.com/topic/architecture)
 
-**Vtt2Srt** is a modern native Android application built in Java that converts WebVTT (`.vtt`) subtitle files into standard SubRip (`.srt`) format. It features a flexible, multi-provider AI translation engine supporting **Google Gemini AI**, **DeepSeek AI**, **Anthropic Claude AI**, and **Custom OpenAI / Local LLM endpoints**, alongside a fallback free web translation pipeline.
+**SubFlow** is a modern native Android application built in Java that converts WebVTT (`.vtt`) subtitle files into standard SubRip (`.srt`) format. It features a flexible, multi-provider AI translation engine supporting **Google Gemini AI**, **DeepSeek AI**, **Anthropic Claude AI**, and **Custom OpenAI / Local LLM endpoints**, alongside a fallback free web translation pipeline.
 
 ---
 
@@ -55,11 +55,11 @@ graph TD
 
 | Pattern | Class / Interface | Description |
 | :--- | :--- | :--- |
-| **Strategy** | [`Translator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/Translator.java) | Allows swapping translation engines ([`GeminiTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/GeminiTranslator.java), [`ClaudeTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/ClaudeTranslator.java), [`OpenAiCompatibleTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/OpenAiCompatibleTranslator.java), [`GoogleTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/GoogleTranslator.java)) transparently. |
-| **Decorator** | [`CachingTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/CachingTranslator.java), [`RetryingTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/RetryingTranslator.java) | Decorates translators with thread-safe caching and retry abilities. |
-| **Chain of Responsibility** | [`FallbackTranslator`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/FallbackTranslator.java) | Tries the primary AI engine first; if errors occur, falls back to backup providers. |
-| **Factory** | [`TranslatorFactory`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/TranslatorFactory.java) | Assembles the complete resilient translator pipeline based on user configuration (`Cache` -> `Fallback` -> `Retrying(AI/Free)`). |
-| **Builder** | [`ConversionOptions.Builder`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/model/ConversionOptions.java), [`AiTranslatorConfig.Builder`](file:///D:/Workspace/IDE/IdeaProjects/Vtt2Srt/app/src/main/java/com/subtitle/vtt2srt/domain/translate/AiTranslatorConfig.java) | Provides fluent, immutable configuration construction. |
+| **Strategy** | [`Translator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/Translator.java) | Allows swapping translation engines ([`GeminiTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/GeminiTranslator.java), [`ClaudeTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/ClaudeTranslator.java), [`OpenAiCompatibleTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/OpenAiCompatibleTranslator.java), [`GoogleTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/GoogleTranslator.java)) transparently. |
+| **Decorator** | [`CachingTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/CachingTranslator.java), [`RetryingTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/RetryingTranslator.java) | Decorates translators with thread-safe caching and retry abilities. |
+| **Chain of Responsibility** | [`FallbackTranslator`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/FallbackTranslator.java) | Tries the primary AI engine first; if errors occur, falls back to backup providers. |
+| **Factory** | [`TranslatorFactory`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/TranslatorFactory.java) | Assembles the complete resilient translator pipeline based on user configuration (`Cache` -> `Fallback` -> `Retrying(AI/Free)`). |
+| **Builder** | [`ConversionOptions.Builder`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/model/ConversionOptions.java), [`AiTranslatorConfig.Builder`](file:///D:/Workspace/IDE/IdeaProjects/SubFlow/app/src/main/java/dev/omarhaidar/subflow/domain/translate/AiTranslatorConfig.java) | Provides fluent, immutable configuration construction. |
 | **Observer** | `LiveData` / `Observer` | Connects domain/viewmodel state updates asynchronously to the user interface. |
 
 ---
@@ -90,7 +90,7 @@ graph TD
 ## 📁 Project Structure
 
 ```
-app/src/main/java/com/subtitle/vtt2srt/
+app/src/main/java/dev/omarhaidar/subflow/
 ├── data/
 │   ├── SimpleHttpClient.java
 │   ├── SubtitleFileRepository.java
@@ -130,7 +130,7 @@ app/src/main/java/com/subtitle/vtt2srt/
     ├── Event.java
     ├── NetworkChecker.java
     ├── TimeFormatter.java
-    └── UI.java
+    └── UiUtil.java
 ```
 
 ---

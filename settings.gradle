@@ -22,5 +22,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Vtt2Srt"
+rootProject.name = "SubFlow"
 include ':app'

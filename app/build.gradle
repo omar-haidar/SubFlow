@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.subtitle.vtt2srt'
+    namespace 'dev.omarhaidar.subflow'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.subtitle.vtt2srt"
+        applicationId "dev.omarhaidar.subflow"
         minSdk 24
         targetSdk 36
         versionCode 1

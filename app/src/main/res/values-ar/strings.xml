@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">محوّل الترجمة VTT ← SRT</string>
 
     <string name="pick_file">اختيار ملف ترجمة (VTT)</string>
     <string name="no_file">لم يتم اختيار ملف بعد</string>
@@ -33,7 +32,7 @@
     <string name="msg_saved">تم حفظ الملف</string>
 
     <string name="action_about">عن التطبيق</string>
-    <string name="about_title">عن محوّل الترجمة</string>
+    <string name="about_title">عن SubFlow</string>
     <string name="about_message">تطبيق أندرويد مفتوح المصدر مخصص لتحويل ملفات الترجمة بصيغة WebVTT (.vtt) إلى صيغة SubRip (.srt) المعيارية مع دعم الترجمة الآلية إلى اللغة العربية.\n\nالمميزات الرئيسية:\n• تحويل صيغ WebVTT إلى SRT\n• ترجمة فورية أونلاين إلى العربية\n• دمج الترجمة الثنائية (عربي + إنجليزي)\n• تصحيح اتجاه النص العربي (RTL)\n• الاحتفاظ بأسماء المتحدثين\n\nالإصدار: 1.0.0</string>
     <string name="btn_close">إغلاق</string>
 

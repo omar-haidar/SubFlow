@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.Vtt2Srt" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.SubFlow" parent="Base.Theme.SubFlow">
         <!-- Brand Colors -->
         <item name="colorPrimary">@color/md_theme_dark_primary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
@@ -25,13 +25,6 @@
         <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_theme_dark_outline</item>
 
-        <!-- System bars -->
-        <item name="android:navigationBarColor">?attr/colorSurface</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
 
-        <!-- Font -->
-        <item name="android:fontFamily">@font/josefin_sans</item>
-        <item name="fontFamily">@font/josefin_sans</item>
     </style>
 </resources>
