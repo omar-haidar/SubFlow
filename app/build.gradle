@@ -1,21 +1,46 @@
+
 plugins {
     id 'com.android.application'
 }
-
+def kspFile = rootProject.file('keystore.properties')
+def ksp = new Properties()
+if (kspFile.exists()){
+    ksp.load(new FileInputStream(kspFile))
+}
 android {
     namespace 'dev.omarhaidar.subflow'
-    compileSdk 36
+    compileSdk 37
 
     defaultConfig {
         applicationId "dev.omarhaidar.subflow"
         minSdk 24
         targetSdk 36
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
+    }
+
+    signingConfigs {
+        debug {
+            if (ksp['storeFile'] != null) {
+                storeFile rootProject.file(ksp['storeFile'])
+                storePassword ksp['storePassword']
+                keyAlias ksp['keyAlias']
+                keyPassword ksp['keyPassword']
+            }
+        }
+        release {
+            if (ksp['storeFile'] != null) {
+                storeFile rootProject.file(ksp['storeFile'])
+                storePassword ksp['storePassword']
+                keyAlias ksp['keyAlias']
+                keyPassword ksp['keyPassword']
+            }
+        }
     }
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -28,6 +53,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
